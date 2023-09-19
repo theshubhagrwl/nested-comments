@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 import Comment from "./components/Comment";
-import { v4 as uuidv4 } from "uuid";
+import CommentInput from "./components/CommentInput";
 
+//eslint-disable-next-line
 const comments = [
   {
     id: 1,
@@ -45,29 +46,15 @@ const comments = [
 ];
 
 function App() {
-  const [comment, setComment] = useState(comments);
-  const [commentBody, setCommentBody] = useState("");
+  const [comment, setComment] = useState([]);
+  const onComment = (newComment) => {
+    setComment((prev) => [newComment, ...prev]);
+  };
   return (
     <div className="flex flex-col gap-6 h-screen w-screen p-6">
-      <input
-        className="p-2 border border-gray-600 w-1/2"
-        type="text"
-        placeholder="What are your thoughts?"
-        value={commentBody}
-        onChange={(e) => setCommentBody(e.target.value)}
-      />
-
-      <button
-        className="border-2 p-2 border-blue-400 w-max"
-        type="submit"
-        onClick={() => {
-          setComment((prev) => [{ id: uuidv4(), text: commentBody }, ...prev]);
-        }}
-      >
-        Add Comment
-      </button>
+      <CommentInput onComment={onComment} />
       <div className="flex flex-col gap-2">
-        {comment.map((item) => (
+        {comment?.map((item) => (
           <Comment key={item.id} comment={item} />
         ))}
       </div>
