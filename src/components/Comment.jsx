@@ -6,10 +6,9 @@ function Comment({ comment }) {
   const [isReplying, setIsReplying] = useState(false);
   const [comments, setComments] = useState(comment?.comments || []);
 
-  console.log(comments);
-
   const onComment = (newComment) => {
-    setComments((prev) => [newComment, ...prev]);
+    setComments((prev) => [...prev, newComment]);
+    setIsReplying(false);
   };
 
   return (

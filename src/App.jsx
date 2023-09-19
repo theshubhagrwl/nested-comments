@@ -48,17 +48,26 @@ const comments = [
 function App() {
   const [comment, setComment] = useState([]);
   const onComment = (newComment) => {
-    setComment((prev) => [newComment, ...prev]);
+    setComment((prev) => [...prev, newComment]);
   };
   return (
-    <div className="flex flex-col gap-6 h-screen w-screen p-6">
-      <CommentInput onComment={onComment} />
-      <div className="flex flex-col gap-2">
-        {comment?.map((item) => (
-          <Comment key={item.id} comment={item} />
-        ))}
+    <>
+      <div className="flex flex-col gap-6 h-screen w-screen p-6">
+        <CommentInput onComment={onComment} />
+        <div className="flex flex-col gap-2">
+          {comment?.map((item) => (
+            <Comment key={item.id} comment={item} />
+          ))}
+        </div>
       </div>
-    </div>
+      <div className="bottom-0 fixed w-full bg-gray-800 text-white p-2">
+        Made by Shubh:
+        <a href="https://www.theshubhagrwl.in" className="text-blue-500">
+          {" "}
+          GitHub
+        </a>
+      </div>
+    </>
   );
 }
 
